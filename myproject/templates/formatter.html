@@ -1,0 +1,11 @@
+{% for q in questions %}
+<div class="card mb-3 shadow-sm">
+    <div class="card-header bg-card">
+        {{ q.difficulty }}
+    </div>
+    <div class="card-body">
+        <p><strong>Q:</strong> {{ q.question }}</p>
+        <p><strong>A:</strong> {{ q.answer }}</p>
+    </div>
+</div>
+{% endfor %}

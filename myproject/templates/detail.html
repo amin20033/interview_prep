@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block title %}Detail{% endblock title %}
+{% block main %}
+<div class="text-center mt-3 mb-3 p-3">
+    <h3>Job Role: {{history.job}}</h3>
+    <h3>Experience: {{history.exp}}</h3>
+    <p class="text-muted">{{history.datetime}}</p>
+</div>
+{% include "formatter.html" %}
+{% endblock main %}

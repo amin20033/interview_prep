@@ -1,0 +1,102 @@
+{% extends "base.html" %} {% block title %}Home{% endblock title %} {% block main %}
+<h1 class="text-center h1 mt-5 mb-3">AI Interview Preparation Assistant</h1>
+<p class="text-center">
+  Generate AI-powered interview questions and answers from any job role. Perfect
+  for practicing interviews, active recall, and improving confidence.
+</p>
+<div class="shadow mt-3 p-5">
+  <form>
+    {% csrf_token %}
+    <label for="job_role">Job Role :</label>
+    <select name="job_role" class="form-select" id="job_role" required>
+      <option value="">Select Job Role</option>
+
+      <!-- Software Development -->
+      <option value="Frontend Developer">Frontend Developer</option>
+      <option value="Backend Developer">Backend Developer</option>
+      <option value="Full Stack Developer">Full Stack Developer</option>
+      <option value="Web Developer">Web Developer</option>
+      <option value="Software Engineer">Software Engineer</option>
+      <option value="Software Developer">Software Developer</option>
+      <option value="Application Developer">Application Developer</option>
+
+      <!-- Programming Specific -->
+      <option value="Python Developer">Python Developer</option>
+      <option value="Java Developer">Java Developer</option>
+      <option value="JavaScript Developer">JavaScript Developer</option>
+      <option value="C++ Developer">C++ Developer</option>
+      <option value="PHP Developer">PHP Developer</option>
+      <option value="Go Developer">Go Developer</option>
+      <option value="Rust Developer">Rust Developer</option>
+
+      <!-- Data Roles -->
+      <option value="Data Analyst">Data Analyst</option>
+      <option value="Data Scientist">Data Scientist</option>
+      <option value="Data Engineer">Data Engineer</option>
+      <option value="Business Intelligence Analyst">
+        Business Intelligence Analyst
+      </option>
+      <option value="Machine Learning Engineer">
+        Machine Learning Engineer
+      </option>
+      <option value="AI Engineer">AI Engineer</option>
+      <option value="Deep Learning Engineer">Deep Learning Engineer</option>
+
+      <!-- Cloud / DevOps -->
+      <option value="DevOps Engineer">DevOps Engineer</option>
+      <option value="Cloud Engineer">Cloud Engineer</option>
+      <option value="Site Reliability Engineer">
+        Site Reliability Engineer
+      </option>
+      <option value="Platform Engineer">Platform Engineer</option>
+
+      <!-- Security -->
+      <option value="Cyber Security Analyst">Cyber Security Analyst</option>
+      <option value="Security Engineer">Security Engineer</option>
+      <option value="Penetration Tester">Penetration Tester</option>
+      <option value="Ethical Hacker">Ethical Hacker</option>
+
+      <!-- Testing -->
+      <option value="QA Engineer">QA Engineer</option>
+      <option value="Automation Test Engineer">Automation Test Engineer</option>
+      <option value="Software Tester">Software Tester</option>
+
+      <!-- Mobile -->
+      <option value="Android Developer">Android Developer</option>
+      <option value="iOS Developer">iOS Developer</option>
+      <option value="Mobile App Developer">Mobile App Developer</option>
+      <option value="React Native Developer">React Native Developer</option>
+
+      <!-- Database -->
+      <option value="Database Administrator">Database Administrator</option>
+      <option value="SQL Developer">SQL Developer</option>
+
+      <!-- Product / Design -->
+      <option value="Product Manager">Product Manager</option>
+      <option value="Technical Product Manager">
+        Technical Product Manager
+      </option>
+      <option value="UI Designer">UI Designer</option>
+      <option value="UX Designer">UX Designer</option>
+
+      <!-- Other Tech Roles -->
+      <option value="Blockchain Developer">Blockchain Developer</option>
+      <option value="Game Developer">Game Developer</option>
+      <option value="Embedded Systems Engineer">
+        Embedded Systems Engineer
+      </option>
+      <option value="AR VR Developer">AR/VR Developer</option>
+    </select>
+    <label for="exp">Experience :</label>
+    <select name="exp" id="exp" class="form-select">
+      <option value="">Select Experience</option>
+      <option value="Fresher">Fresher</option>
+      <option value="1-2 Years">1-2 Years</option>
+      <option value="3-5 Years">3-5 Years</option>
+      <option value="5+ Years">5+ Years</option>
+    </select>
+    <button class="btn btn-primary mt-3 ytBtn">Submit</button>
+  </form>
+</div>
+<div id="body" class="mt-3 mb-3"></div>
+{% endblock main %}

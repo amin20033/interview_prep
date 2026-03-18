@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block title %}History{% endblock title %}
+{% block main %}
+{% if histories %}
+{% for h in histories %}
+<a href="/details/{{h.id}}/"><div class="card shadow mt-3 mb-3 p-3 text-center text-light btn-me">
+    <h3>Job Role: {{h.job}}</h3>
+    <h3>Experience: {{h.exp}}</h3>
+    <p>{{h.datetime}}</p>
+</div>
+</a>
+{% endfor %}
+{% else %}
+<h3 class="text-center card mt-5 p-5 shadow">Nothing here yet. Start your first interview practice to see your history.</h3>
+{% endif %}
+{% endblock main %}

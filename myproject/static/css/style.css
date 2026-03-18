@@ -1,0 +1,33 @@
+.navbar.mynavbar {
+  background: linear-gradient(90deg, #a779d6, #e88aa6);
+  padding: 0px 0;
+  text-align: center;
+  color: white;
+  font-size: 18px;
+  font-weight: 600;
+}
+.navbar.mynavbar .nav-link,
+.navbar.mynavbar .navbar-brand {
+  color: white;
+}
+
+.mynavbar .nav-link {
+  color: white !important;
+  font-weight: 500;
+}
+
+.mynavbar .nav-link:hover {
+  color: #f1f1f1;
+}
+.btn-me{
+  background-color: #a779d6;
+}
+a{
+  text-decoration: none;
+}
+.now{
+  height: 40%;
+}
+.bg-card{
+  background: linear-gradient(90deg, #a779d6, #e88aa6);
+}
