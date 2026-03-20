@@ -6,9 +6,6 @@ import requests
 import re
 from .models import User,History
 from django.contrib.auth import authenticate,login,logout
-# ---------------------------
-# Ask AI
-# ---------------------------
 
 def ask_ai(role,experience):
     API_URL = "http://localhost:11434/api/chat"
@@ -43,18 +40,11 @@ Answer:
         ],
         "stream": False
     }
-
     response = requests.post(API_URL, json=payload)
-
     if response.status_code != 200:
         return f"Error {response.status_code}: {response.text}"
-
     data = response.json()
     return data["message"]["content"]
-
-
-
-import re
 
 def format_ai_response(text):
     difficulties = ["Easy", "Medium", "Hard"]
@@ -67,31 +57,19 @@ def format_ai_response(text):
 
         if match:
             section = match.group(1).strip()
-
-            # 🔥 Clean unwanted labels
             section = section.replace("Q:", "").replace("A:", "")
             section = section.replace("Question:", "").replace("Answer:", "")
-
-            # 🔥 Split into lines
             lines = [line.strip() for line in section.split("\n") if line.strip()]
-
             if len(lines) >= 2:
-                # ✅ First meaningful line = Question
                 question = lines[0]
-
-                # ✅ Rest = Answer
                 answer = " ".join(lines[1:])
-
                 result.append({
                     "difficulty": diff,
                     "question": question,
                     "answer": answer
                 })
-
     return result
-# ---------------------------
-# Main View
-# ---------------------------
+
 @login_required(login_url="/")
 def home(request):
     if request.method=="POST":
