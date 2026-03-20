@@ -78,15 +78,35 @@ def home(request):
         if job=="" or exp=="":
             return JsonResponse({"status":"error","message":"All fields are mandatory"})
         try:
-            response=ask_ai(job,exp)
-            response=response.replace("**","")
-            try:
-                questions=format_ai_response(response)
-            except:
-                return JsonResponse({"status":"error","message":"Unable to generate a response. Please try again."})
-            History.objects.create(user=request.user,job=job,exp=exp,response=response)
-        except Exception as e:
-            return JsonResponse({"status":"error","message":str(e)})
+            response = ask_ai(job, exp)
+            response = response.replace("**", "")
+        except Exception:
+            response = f"""
+⚠️ Demo Mode (AI not available in deployed environment)
+
+This application uses a locally hosted AI model (Ollama), which is not available in the deployed version.
+
+👉 To experience full functionality, please run the project locally.
+
+---
+
+Easy
+Question: What is {job}?
+Answer: {job} is a role that involves working with relevant tools and technologies based on business requirements.
+
+Medium
+Question: What skills are required for a {job} with {exp} experience?
+Answer: It requires strong fundamentals, problem-solving ability, and hands-on experience with tools and frameworks used in the domain.
+
+Hard
+Question: How would you handle a complex real-world problem as a {job}?
+Answer: Break the problem into smaller parts, analyze data or requirements, apply suitable techniques, and validate results efficiently.
+"""
+        try:
+            questions=format_ai_response(response)
+        except:
+            return JsonResponse({"status":"error","message":"Unable to generate a response. Please try again."})
+        History.objects.create(user=request.user,job=job,exp=exp,response=response)
         return JsonResponse({"status":"success","message":render_to_string("formatter.html",{"questions":questions})})
     return render(request, "home.html")
 
