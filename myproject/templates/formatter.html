@@ -1,11 +1,15 @@
-{% for q in questions %}
-<div class="card mb-3 shadow-sm">
-    <div class="card-header bg-card">
-        {{ q.difficulty }}
+<div class="row">
+    {% for q in questions %}
+    <div class="col-md-4 mb-3">
+        <div class="card mb-3 shadow-sm h-100">
+            <div class="card-header bg-card">
+                {{ q.difficulty }}
+            </div>
+            <div class="card-body">
+                <p><strong>Q:</strong> {{ q.question }}</p>
+                <p><strong>A:</strong> {{ q.answer }}</p>
+            </div>
+        </div>
     </div>
-    <div class="card-body">
-        <p><strong>Q:</strong> {{ q.question }}</p>
-        <p><strong>A:</strong> {{ q.answer }}</p>
-    </div>
+    {% endfor %}
 </div>
-{% endfor %}

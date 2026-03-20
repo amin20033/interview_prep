@@ -46,28 +46,42 @@ Answer:
     data = response.json()
     return data["message"]["content"]
 
+def clean_text(text):
+    text = re.sub(r"(Q:|A:|Question:|Answer:)", "", text, flags=re.I)
+    text = re.sub(r"\s+", " ", text)
+    return text.strip()
+
 def format_ai_response(text):
     difficulties = ["Easy", "Medium", "Hard"]
     result = []
-
     for i, diff in enumerate(difficulties):
-
         pattern = rf"{diff}(.*?)(?={'|'.join(difficulties[i+1:]) if i < 2 else '$'})"
         match = re.search(pattern, text, re.S)
-
-        if match:
-            section = match.group(1).strip()
-            section = section.replace("Q:", "").replace("A:", "")
-            section = section.replace("Question:", "").replace("Answer:", "")
-            lines = [line.strip() for line in section.split("\n") if line.strip()]
-            if len(lines) >= 2:
-                question = lines[0]
-                answer = " ".join(lines[1:])
-                result.append({
-                    "difficulty": diff,
-                    "question": question,
-                    "answer": answer
-                })
+        if not match:
+            continue
+        section = match.group(1).strip()
+        question = ""
+        answer = ""
+        q_match = re.search(r"(Q:|Question:)\s*(.*?)\s*(?=(A:|Answer:))", section, re.S)
+        q_fallback = re.search(r"(.*?\?)", section, re.S)
+        a_match = re.search(r"(A:|Answer:)\s*(.*)", section, re.S)
+        if q_match:
+            question = q_match.group(2).strip()
+        elif q_fallback:
+            question = q_fallback.group(1).strip()
+        else:
+            question = "Question not generated properly."
+        if a_match:
+            answer = a_match.group(2).strip()
+        else:
+            answer = "No answer generated."
+        question = clean_text(question)
+        answer = clean_text(answer)
+        result.append({
+            "difficulty": diff,
+            "question": question,
+            "answer": answer
+        })
     return result
 
 @login_required(login_url="/")
@@ -79,6 +93,7 @@ def home(request):
             return JsonResponse({"status":"error","message":"All fields are mandatory"})
         try:
             response = ask_ai(job, exp)
+            print(response)
             response = response.replace("**", "")
         except Exception:
             response = f"""

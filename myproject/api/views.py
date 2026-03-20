@@ -56,7 +56,7 @@ class ForgotPasswordRequestView(APIView):
             send_mail(
                 "Password Reset",
                 f"Reset your password: {reset_link}",
-                "admin@example.com",
+                "iamaminurrahman2003@gmail.com",
                 [user.email],
             )
             return Response({"message": "Reset link sent"},status=200)
