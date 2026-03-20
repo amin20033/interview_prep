@@ -40,8 +40,8 @@ An AI-powered web application that generates structured interview questions and 
 
 <h3>1️⃣ Clone the Repository</h3>
 <pre>
-git clone https://github.com/your-username/ai-interview-assistant.git
-cd ai-interview-assistant
+git clone https://github.com/amin20033/interview_prep.git
+cd myproject
 </pre>
 
 <h3>2️⃣ Create Virtual Environment</h3>
