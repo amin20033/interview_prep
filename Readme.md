@@ -87,11 +87,13 @@ ollama --version
 <h3>Step 3: Pull the Required Model</h3>
 <pre>
 ollama pull llama3.2:1b
+ollama pull phi3
 </pre>
 
 <h3>Step 4: Run the Model</h3>
 <pre>
 ollama run llama3.2:1b
+ollama run phi3
 </pre>
 
 <p>
