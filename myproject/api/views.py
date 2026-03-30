@@ -23,10 +23,11 @@ class HistoryView(APIView):
     def post(self,request):
         job=request.data.get("job")
         exp=request.data.get("exp")
-        if job is None or exp is None:
-            return Response({"status":"error","message":"job and exp can't be empty"},status=400)
-        response=ask_ai(job,exp)
-        print(response)
+        model=request.data.get("model")
+        if job is None or exp is None or model is None:
+            return Response({"status":"error","message":"job or exp or model can't be empty"},status=400)
+        response=ask_ai(job,exp,model)
+        response = response.replace("**", "")
         data={
             "job":job,
             "exp":exp,

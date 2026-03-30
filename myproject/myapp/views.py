@@ -7,7 +7,7 @@ import re
 from .models import User,History
 from django.contrib.auth import authenticate,login,logout
 
-def ask_ai(role,experience):
+def ask_ai(role,experience,model):
     API_URL = "http://localhost:11434/api/chat"
     prompt = f"""
 You are an interview preparation assistant.
@@ -34,7 +34,7 @@ Question:
 Answer:
 """
     payload = {
-        "model": "llama3.2:1b",
+        "model": model,
         "messages": [
             {"role": "user", "content": prompt}
         ],
@@ -93,21 +93,15 @@ def home(request):
     if request.method=="POST":
         job = request.POST.get("job")
         exp = request.POST.get("exp")
-        if job=="" or exp=="":
+        model = request.POST.get("model")
+        if job=="" or exp=="" or model=="":
             return JsonResponse({"status":"error","message":"All fields are mandatory"})
         try:
-            response = ask_ai(job, exp)
+            response = ask_ai(job, exp,model)
             print(response)
             response = response.replace("**", "")
         except Exception:
             response = f"""
-⚠️ Demo Mode (AI not available in deployed environment)
-
-This application uses a locally hosted AI model (Ollama), which is not available in the deployed version.
-
-👉 To experience full functionality, please run the project locally.
-
----
 
 Easy
 Question: What is {job}?

@@ -131,6 +131,7 @@ $(function () {
     e.preventDefault()
     let job = $("#job_role").val();
     let exp=$("#exp").val()
+    let model = $("#model").val();
     let csrfmiddlewaretoken=$("input[name='csrfmiddlewaretoken']").val()
      $("#body").html(
        '<div class="shadow mt-3 p-3 now d-flex justify-center items-center"><div class="spinner-border text-primary"></div><pre> Processing...</pre></div>',
@@ -141,7 +142,8 @@ $(function () {
       data:{
         job:job,
         csrfmiddlewaretoken:csrfmiddlewaretoken,
-        exp:exp
+        exp:exp,
+        model:model
       },
       success:function(response){
         if(response.status=="success"){

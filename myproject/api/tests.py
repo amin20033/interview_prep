@@ -165,7 +165,7 @@ class HistoryAPITest(APITestCase):
         response=self.client.get("http://127.0.0.1:8000/api/history/")
         self.assertEqual(response.status_code,200)
     def test_unauthenticated_post(self):
-        response=self.client.post("http://127.0.0.1:8000/api/history/",{"job":"Software Engineer","exp":"1 Year"})
+        response=self.client.post("http://127.0.0.1:8000/api/history/",{"job":"Software Engineer","exp":"1 Year","model":"phi3"})
         self.assertEqual(response.status_code,401)
 
     def test_authenticated_post(self):
@@ -175,7 +175,7 @@ class HistoryAPITest(APITestCase):
         self.client.credentials(
             HTTP_AUTHORIZATION="Bearer "+access
         )
-        response=self.client.post("http://127.0.0.1:8000/api/history/",{"job":"Software Engineer","exp":"1 Year"})
+        response=self.client.post("http://127.0.0.1:8000/api/history/",{"job":"Software Engineer","exp":"1 Year","model":"llama3.2:1b"})
         self.assertEqual(response.status_code,201)
 class Detail(APITestCase):
     def test_unauthenticated(self):
@@ -188,7 +188,7 @@ class Detail(APITestCase):
         self.client.credentials(
             HTTP_AUTHORIZATION="Bearer "+access
         )
-        response=self.client.post("http://127.0.0.1:8000/api/history/",{"job":"Software Engineer","exp":"1 Year"})
+        response=self.client.post("http://127.0.0.1:8000/api/history/",{"job":"Software Engineer","exp":"1 Year","model":"llama3.2:1b"})
         response=self.client.get("http://127.0.0.1:8000/api/details/1/")
         self.assertEqual(response.status_code,200)
     def test_authenticated_wrong_id(self):
@@ -198,7 +198,7 @@ class Detail(APITestCase):
         self.client.credentials(
             HTTP_AUTHORIZATION="Bearer "+access
         )
-        response=self.client.post("http://127.0.0.1:8000/api/history/",{"job":"Software Engineer","exp":"1 Year"})
+        response=self.client.post("http://127.0.0.1:8000/api/history/",{"job":"Software Engineer","exp":"1 Year","model":"llama3.2:1b"})
         response=self.client.get("http://127.0.0.1:8000/api/details/2/")
         self.assertEqual(response.status_code,404)
     
